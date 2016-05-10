@@ -22,10 +22,10 @@ $(".suppression-badge").on('click', function () {
     })
             .done(function (response) {
                 if (response.data) {
-                    $("#delete-text").text("êtes vous sure de vouloir supprimer cette question?");
+                    $("#delete-text").text(response.msg);
                     $("#delete-btn").attr("disabled", false);
                 } else {
-                    $("#delete-text").text("Impossible de supprimer cette question, elle est utilisée dans des un questionnaire");
+                    $("#delete-text").text(response.msg);
                     $("#delete-btn").attr("disabled", true);
                 }
             })

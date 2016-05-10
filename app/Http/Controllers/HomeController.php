@@ -129,8 +129,8 @@ class HomeController extends Controller
         }
 
 
-        $subject = "Résultat du questionnaire du candidat: ".session('lastName')." ".session('firstName');
-        $message = "il a obtenue : ".$total." point(s)";
+        $subject = trans('content.mail_subject', ['firstname' => session('lastName'), 'lastname' => session('firstName')]);
+        $message = trans('content.mail_body', ['point' => $total]);
 
         Mail::send('emails.mail', ['body' => $message], function ($m) use ($subject) {
             $m->from(Config::get('mail.from'), 'teachiteasy');

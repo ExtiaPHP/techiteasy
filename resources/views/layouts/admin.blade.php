@@ -44,6 +44,8 @@
         {!! Html::script('assets/js/jquery-2.1.4.min.js') !!}
         {!! Html::script('assets/js/bootstrap.min.js') !!}
         {!! Html::script('assets/js/admin.js') !!}
+        {!! Html::script('assets/js/jquery.canvasjs.min.js') !!}
+        {!! Html::script('assets/js/jquery.canvasjs.min.js') !!}
 
         @yield('script')
     </body>

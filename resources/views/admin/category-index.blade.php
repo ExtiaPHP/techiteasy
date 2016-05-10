@@ -1,21 +1,17 @@
 @extends('layouts.admin')
 
-@section('title', 'Gestion des catégories')
+@section('title', trans('content.title_page_category_index'))
 
 @section('page', $page)
 
 @section('content')
-<h1 class="page-header"><i class="fa fa-bookmark"></i> Catégories</h1>
-<ol class="breadcrumb">
-	<li><a href="{!! route('dashboard') !!}"><i class="fa fa-tachometer"></i> Dashboard</a></li>
-	<li><a href="{!! route('admin.category.create') !!}"><i class="fa fa-plus-square"></i> Ajouter une catégorie</a></li>
-</ol>
+<h1 class="page-header"><i class="fa fa-bookmark"></i> {!! trans('content.title_category_index') !!}</h1>
 <table class="table table-striped">
 	<thead>
 		<tr>
-			<th>#</th>
-			<th>Nom</th>
-			<th>Actions</th>
+			<th>{!! trans('content.category_index_table_hashtag') !!}</th>
+			<th>{!! trans('content.category_index_table_name') !!}</th>
+			<th>{!! trans('content.category_index_table_action') !!}</th>
 		</tr>	
 	</thead>
 	<tbody>
@@ -31,6 +27,10 @@
 @endforeach
 	</tbody>
 </table>
+
+<div>
+	<a href="{!! route('admin.category.create') !!}" class="btn btn-extia pull-right">{!! trans('content.category_add_button') !!}</a>
+</div>
 {!! $categories->render() !!}
 <div id="categoryDeleteModal" class="modal fade" tabindex="-1" role="dialog">
 	<div class="modal-dialog">
@@ -38,10 +38,10 @@
     		{!! Form::open(array('url' => URL::route('admin.category.destroy', 0), 'method' => 'DELETE', 'id' => 'category-delete-form')) !!}
 	    		<div class="modal-header">
 	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        		<h4 class="modal-title">Supprimer la catégorie "<span id="category-name-delete"></span>"</h4>
+	        		<h4 class="modal-title">{!! trans('content.category_title_delete') !!} "<span id="category-name-delete"></span>"</h4>
 	      		</div>
 	      		<div class="modal-body">
-	        		<p>Attention en supprimant cette catégorie toute les questions liées n'y seront plus attribuées. Êtes vous certain de de vouloir supprimer cette catégorie ?</p>
+	        		<p>{!! trans('content.category_index_modal_text') !!}</p>
 	      		</div>
 	      		<div class="modal-footer">
 	        		<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>

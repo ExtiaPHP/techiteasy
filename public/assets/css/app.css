@@ -200,3 +200,7 @@ body {
   min-height:5px;
   background-color:#ef6b00;
 }
+
+.margin_top_10 {
+  margin-top : 10px;
+}

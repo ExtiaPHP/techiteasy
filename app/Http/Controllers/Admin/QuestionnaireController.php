@@ -87,7 +87,7 @@ class QuestionnaireController extends Controller
 
         return redirect()
                 ->route('admin.questionnaire.index')
-                ->withSuccess('Le questionnaire a bien été modifiée.');
+                ->withSuccess(trans('content.questionnaire_msg_update_successful'));
     }
 
     protected function saveQuestion($list, $id) {
@@ -129,7 +129,7 @@ class QuestionnaireController extends Controller
 
         return redirect()
             ->route('admin.questionnaire.index')
-            ->withSuccess('Le questionnaire a été supprimé.');
+            ->withSuccess(trans('content.questionnaire_msg_delete_successful'));
     }
 
 }

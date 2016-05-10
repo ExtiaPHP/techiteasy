@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Questionnaire Extia')
+@section('title', trans('content.launch_page_title'))
 
 @section('content')
 
@@ -10,7 +10,7 @@
     <div class="col-md-12">
         <div class="login-panel panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Questionnaire Extia:</h3>
+                <h3 class="panel-title">{!! trans('content.launch_title') !!}</h3>
             </div>
             <div class="panel-body">
             	@if (count($question) == 0)

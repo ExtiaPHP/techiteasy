@@ -12,7 +12,7 @@
                 </div>
             @else
                 <div class="collapse navbar-collapse navbar-right">
-                    <a href="{{ route('login') }}"class="btn btn-default navbar-btn"><span>Admin</span> <i class="fa fa-lock"></i></a>
+                    <a href="{{ route('login') }}"class="btn btn-default navbar-btn"><span>{!! trans('content.header_admin') !!}</span> <i class="fa fa-lock"></i></a>
                 </div>
             @endif
         </div>

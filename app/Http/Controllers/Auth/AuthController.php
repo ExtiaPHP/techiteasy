@@ -33,7 +33,7 @@ class AuthController extends Controller
             return redirect()->intended($this->redirectPath);
         }
 
-        return back()->withInput()->withErrors('Combinaison login / mot de passe inconnu.');
+        return back()->withInput()->withErrors(trans('content.bad_password'));
     }
 
     /**

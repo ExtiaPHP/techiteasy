@@ -57,6 +57,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
         'as' => 'dashboard', 'uses' => 'Admin\AdminController@dashboard'
     ]);
 
+    Route::get('/piequestion', [
+        'as' => 'dashboard.piequestion', 'uses' => 'Admin\AdminController@questionByCategoryChart'
+    ]);
+
+    Route::get('/piequestionnaire', [
+        'as' => 'dashboard.piequestionnaire', 'uses' => 'Admin\AdminController@questionnaireByCategoryChart'
+    ]);
+
     Route::resource('category', 'Admin\CategoryController', ['except' => ['show']]);
 
     Route::resource('question', 'Admin\QuestionController');

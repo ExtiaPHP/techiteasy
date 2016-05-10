@@ -64,7 +64,7 @@ class CategoryController extends Controller
 
         return redirect()
                 ->route('admin.category.index') 
-                ->withSuccess('La catégorie a bien été enregistrée.');
+                ->withSuccess(trans('content.category_index_delete_successfull'));
     }
 
     /**

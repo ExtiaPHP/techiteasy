@@ -1,18 +1,18 @@
 @extends('layouts.admin')
 
-@section('title', 'Administration')
+@section('title', trans('content.title_page_question_index'))
 
 @section('content')
-<h1 class="page-header"><i class="fa fa-question-circle"></i> Questions</h1>
+<h1 class="page-header"><i class="fa fa-question-circle"></i> {!! trans('content.title_question_index') !!}</h1>
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>#</th>
-            <th>Categorie</th>
-            <th>Question</th>
-            <th>Description</th>
-            <th>Difficulté</th>
-            <th>Actions</th>
+            <th>{!! trans('content.question_index_table_hashtag') !!}</th>
+            <th>{!! trans('content.question_index_table_category') !!}</th>
+            <th>{!! trans('content.question_index_table_question') !!}</th>
+            <th>{!! trans('content.question_index_table_description') !!}</th>
+            <th>{!! trans('content.question_index_table_level') !!}</th>
+            <th>{!! trans('content.question_index_table_action') !!}</th>
         </tr>	
     </thead>
     <tbody>
@@ -35,46 +35,7 @@
     </tbody>
 </table>
 <div>
-    <a href="{!! route('admin.question.create') !!}" class="btn btn-extia pull-right">Ajouter une question</a>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-
-                <h4 class="modal-title" id="myModalLabel">
-                    <i class="glyphicon glyphicon-user"></i>
-                    Édition
-                </h4>
-            </div>
-            <form id="updateCSV" action="uploadCsv.php" method="post" enctype="multipart/form-data">
-                <div class="modal-body">
-
-                    <div class="form-group input-group">
-                        <span class="input-group-addon">
-                            <i class="fa fa-pencil-square-o"></i>
-                        </span>
-                        <input id="id" class="form-control" placeholder="Identifiant" name="Identifiant" type="text" value="" required="">
-                    </div>
-                    <div class="form-group input-group">
-                        <span class="input-group-addon">
-                            <i class="glyphicon glyphicon-lock">
-                            </i>
-                        </span>
-                        <input id="mdp" class="form-control" placeholder="Mot de passe" name="Mot de passe" type="password" value="" required="">
-                    </div>
-                    <input id="Csv" type="file" title="Fichier à ajouter" name="Csv">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-extia">Save changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
+    <a href="{!! route('admin.question.create') !!}" class="btn btn-extia pull-right">{!! trans('content.question_index_add_button') !!}</a>
 </div>
 
 <div class="modal fade" id="modalSup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -85,18 +46,18 @@
 
                 <h4 class="modal-title" id="myModalLabel">
                     <i class="fa fa-times"></i>
-                    Suppression
+                    {!! trans('content.question_index_title_delete') !!}
                 </h4>
             </div>
             <form id="delete-form" action="" method="POST">
                 <input type="hidden" name="_method" value="DELETE">
                 <input id="csrf" type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="modal-body">
-                    <p id="delete-text"> êtes vous sure de vouloir supprimer cette question? </p>
+                    <p id="delete-text"></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default " data-dismiss="modal">Annuler</button>
-                    <button id="delete-btn" type="submit" class="btn btn-extia">Supprimer</button>
+                    <button type="button" class="btn btn-default " data-dismiss="modal">{!! trans('content.question_index_delete_cancel_button') !!}</button>
+                    <button id="delete-btn" type="submit" class="btn btn-extia">{!! trans('content.question_index_delete_confirm_button') !!}</button>
                 </div>
             </form>
         </div>

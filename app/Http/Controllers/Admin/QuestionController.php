@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Question;
 use App\Models\Category;
 use DB;
-use Validator;
+    use Validator;
 
 use App\Models\Level;
 
@@ -46,7 +46,6 @@ class QuestionController extends Controller {
         foreach ($cats as $cat) {
             $categories[$cat->id] = $cat->name;
         }
-        error_log(print_r($categories, true));
         return view('admin.questionAjout', compact('page', 'question', 'categories', 'difficulties'));
     }
 
@@ -100,15 +99,6 @@ class QuestionController extends Controller {
         return redirect(route('admin.question.index'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id) {
-        error_log(print_r('coucouShow', true));
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -254,7 +244,7 @@ class QuestionController extends Controller {
 
          return redirect()
                 ->route('admin.question.index')
-                ->withSuccess('La question a bien été modifiée.');
+                ->withSuccess(trans('content.question_msg_edit_successful'));
 
         
  
@@ -286,12 +276,14 @@ class QuestionController extends Controller {
             if (empty($questionnaire)) {
                 $reponse = array(
                     'success' => true,
-                    'data' => true
+                    'data' => true,
+                    'msg' => trans('content.question_index_delete_good')
                 );
             } else {
                 $reponse = array(
                     'success' => true,
-                    'data' => false
+                    'data' => false,
+                    'msg' => trans('content.question_index_delete_bad')
                 );
             }
             return json_encode($reponse);
