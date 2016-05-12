@@ -49,6 +49,30 @@ class QuestionController extends Controller {
         return view('admin.questionAjout', compact('page', 'question', 'categories', 'difficulties'));
     }
 
+    protected function checkValidator($request) {
+        $desc = trans('content.question_add_placeholder_description');
+        $quest = trans('content.question_add_placeholder_question');
+        $rep1 = trans('content.question_add_placeholder_response_1');
+        $rep2 = trans('content.question_add_placeholder_response_2');
+
+        $validator = Validator::make(
+            [
+                $desc => $request->input('description'),
+                $quest => $request->input('question'),
+                $rep1 => $request->input('answer1'),
+                $rep2 => $request->input('answer2'),
+            ],
+            [
+                $desc => 'required',
+                $quest => 'required',
+                $rep1 => 'required',
+                $rep2 => 'required',
+            ]);
+
+        return $validator;
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -57,6 +81,14 @@ class QuestionController extends Controller {
      */
     public function store(Request $request) {
         if ($request->isMethod('post')) {
+
+            $validator = $this->checkValidator($request);
+
+            if ($validator->fails()) {
+                return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
 
             $idQuestion = DB::table('question')->insertGetId(
                     ['level' => $request->input('difficulties'), 'label' => $request->input('question'), 'description' => $request->input('description'), 'category_id' => $request->input('categories')]);
@@ -154,17 +186,14 @@ class QuestionController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        
-     
-        //$request
-        /*
-    echo $request->input('reponse_1_id');
-        echo "<pre>";
-        var_dump( $request->input('reponse_1_id'));
-        echo "</pre>";
-      die('PEPA IS HERE');
-       
-       */
+
+        $validator = $this->checkValidator($request);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         $page     = 'question';
         $question = question::findOrFail($id);

@@ -71,7 +71,17 @@ class QuestionnaireController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        
+        $questions = json_decode($request->input('listcheck'), true);
+        $champ = trans('content.questionnaire_edit_label_nom');
+
+        $validator = Validator::make([ $champ => $request->input('title'),'q' => $questions],
+            [ $champ => 'required', 'q' => 'emptyquestion']);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         $page     = 'questionnaire';
         $questionnaire = questionnaire::findOrFail($id);
@@ -83,7 +93,7 @@ class QuestionnaireController extends Controller
 
         QuestionnaireHasQuestion::where('questionnaire_id', '=', $id)->delete();
 
-        $this->saveQuestion(json_decode($request->input('listcheck')), $id);
+        $this->saveQuestion($questions, $id);
 
         return redirect()
                 ->route('admin.questionnaire.index')
@@ -107,10 +117,23 @@ class QuestionnaireController extends Controller
     public function store(Request $request) {
         if ($request->isMethod('post')) {
 
+            $questions = json_decode($request->input('listcheck'), true);
+
+            $champ = trans('content.questionnaire_edit_label_nom');
+
+            $validator = Validator::make([ $champ => $request->input('title'),'q' => $questions],
+                [ $champ => 'required', 'q' => 'emptyquestion']);
+
+            if ($validator->fails()) {
+                return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+
             $idQuestionnaire = DB::table('questionnaire')->insertGetId(
                     ['title' => $request->input('title')]);
 
-            $this->saveQuestion(json_decode($request->input('listcheck')), $idQuestionnaire);
+            $this->saveQuestion($questions, $idQuestionnaire);
 
             return redirect(route('admin.questionnaire.index'));
         }

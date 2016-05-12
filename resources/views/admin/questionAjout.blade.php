@@ -17,11 +17,11 @@
 </div>
 <div class="form-group">
     <label for="description">{!! trans('content.question_add_label_description') !!}</label>
-    {!! Form::text('description', $question->label, array('class' => 'form-control', 'placeholder' => trans('content.question_add_placeholder_description'), 'required' => 'required')) !!}
+    {!! Form::text('description', $question->label, array('class' => 'form-control', 'placeholder' => trans('content.question_add_placeholder_description'))) !!}
 </div>
 <div class="form-group">
     <label for="question">{!! trans('content.question_add_label_question') !!}</label>
-    {!! Form::textArea('question', $question->description, array('class' => 'form-control', 'placeholder' => trans('content.question_add_placeholder_question'), 'rows' => '3', 'required' => 'required')) !!}
+    {!! Form::textArea('question', $question->description, array('class' => 'form-control', 'placeholder' => trans('content.question_add_placeholder_question'), 'rows' => '3')) !!}
 </div>
 <div class="form-group">
     <label for="difficulty">{!! trans('content.question_add_label_level') !!}</label>
@@ -34,10 +34,10 @@
       @if (isset($aReponses[0]))
        {!! Form::hidden('reponse_1_id', $aReponses[0]->id) !!}
        {!! Form::checkbox('reponse_valide_1', 1, $aReponses[0]->verify) !!}
-       {!! Form::text('answer1', $aReponses[0]->label, array('class' => 'form-control', 'placeholder' => trans('content.question_add_placeholder_response_1'), 'required' => 'required')) !!}
+       {!! Form::text('answer1', $aReponses[0]->label, array('class' => 'form-control', 'placeholder' => trans('content.question_add_placeholder_response_1'))) !!}
     @else
        {!! Form::checkbox('reponse_valide_1', 1) !!}
-       {!! Form::text('answer1', null, array('class' => 'form-control', 'placeholder' => trans('content.question_add_placeholder_response_1'), 'required' => 'required')) !!}
+       {!! Form::text('answer1', null, array('class' => 'form-control', 'placeholder' => trans('content.question_add_placeholder_response_1'))) !!}
     @endif
 </div>
 <div class="form-group">
@@ -45,10 +45,10 @@
         @if (isset($aReponses[1]))
         {!! Form::hidden('reponse_2_id', $aReponses[1]->id) !!}
         {!! Form::checkbox('reponse_valide_2', 1,$aReponses[1]->verify) !!}
-        {!! Form::text('answer2', $aReponses[1]->label, array('class' => 'form-control', 'placeholder' => trans('content.question_add_placeholder_response_2'), 'required' => 'required')) !!}
+        {!! Form::text('answer2', $aReponses[1]->label, array('class' => 'form-control', 'placeholder' => trans('content.question_add_placeholder_response_2'))) !!}
         @else
         {!! Form::checkbox('reponse_valide_2', 1) !!}
-        {!! Form::text('answer2', null, array('class' => 'form-control', 'placeholder' => trans('content.question_add_placeholder_response_2'), 'required' => 'required')) !!}
+        {!! Form::text('answer2', null, array('class' => 'form-control', 'placeholder' => trans('content.question_add_placeholder_response_2'))) !!}
         @endif
 </div>
 <div class="form-group">

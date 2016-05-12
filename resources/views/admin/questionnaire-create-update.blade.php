@@ -28,7 +28,7 @@
 			'method' => $questionnaire->id ? 'put' : 'post',
 			'id' => 'formquestionnaire')) !!}
 			<div class="form-group">
-				{!! Form::text('title', $questionnaire->title, array('class' => 'form-control', 'placeholder' => 'Nom', '	')) !!}
+				{!! Form::text('title', $questionnaire->title, array('class' => 'form-control', 'placeholder' => trans('content.questionnaire_edit_label_nom'))) !!}
 			</div>
 			<div>
 				{!! Form::select('categories', ['' => ''] + $categories, '', array('class' => 'form-control', 'id' => 'categories')) !!}

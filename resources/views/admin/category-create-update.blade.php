@@ -23,7 +23,7 @@
 		{!! Form::open(array('url' => $category->id ? URL::route('admin.category.update', $category->id) : URL::route('admin.category.store'), 'method' => $category->id ? 'put' : 'post')) !!}
 			<div class="form-group">
 				<label>{!! trans('content.category_add_label_name') !!}</label>
-				{!! Form::text('name', $category->name, array('class' => 'form-control', 'placeholder' => trans('content.category_add_placeholder_name'), 'required' => 'required')) !!}
+				{!! Form::text('name', $category->name, array('class' => 'form-control', 'placeholder' => trans('content.category_add_placeholder_name'))) !!}
 			</div>
 			<button type="submit" class="btn btn-lg btn-extia btn-block">{!! $category->id ? trans('content.category_edit_button').' <i class="fa fa-check"></i>' : trans('content.category_add_button').' <i class="fa fa-plus"></i>' !!}</i></button>
 		{!! Form::close() !!}

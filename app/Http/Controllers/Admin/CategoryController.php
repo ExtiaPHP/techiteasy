@@ -48,7 +48,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = $this->validator($request->all());
+        $validator = $this->checkValidator($request);
 
         if ($validator->fails()) {
             return redirect()
@@ -64,7 +64,7 @@ class CategoryController extends Controller
 
         return redirect()
                 ->route('admin.category.index') 
-                ->withSuccess(trans('content.category_index_delete_successfull'));
+                ->withSuccess(trans('content.category_index_store_successfull'));
     }
 
     /**
@@ -93,11 +93,11 @@ class CategoryController extends Controller
         $page     = 'category';
         $category = Category::findOrFail($id);
 
-        $validator = $this->validator($request->all());
+        $validator = $this->checkValidator($request);
 
         if ($validator->fails()) {
             return redirect()
-                    ->route('admin.category.create')
+                    ->back()
                     ->withErrors($validator)
                     ->withInput();
         }
@@ -107,7 +107,7 @@ class CategoryController extends Controller
 
         return redirect()
                 ->route('admin.category.index')
-                ->withSuccess('La catégorie a bien été modifiée.');
+                ->withSuccess(trans('content.category_update_successfull'));
     }
 
     /**
@@ -127,7 +127,7 @@ class CategoryController extends Controller
        
         return redirect()
                 ->route('admin.category.index')
-                ->withSuccess('La catégorie a été supprimée.');
+                ->withSuccess(trans('content.category_delete_successfull'));
     }
 
     /**
@@ -136,11 +136,18 @@ class CategoryController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|max:255|min:4'
-        ]);
+    protected function checkValidator($request) {
+        $name = trans('content.category_add_placeholder_name');
+
+        $validator = Validator::make(
+            [
+                $name => $request->input('name'),
+            ],
+            [
+                $name => 'required',
+            ]);
+
+        return $validator;
     }
 
 }

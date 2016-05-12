@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use Validator;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -13,7 +15,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Validator::extendImplicit('emptyquestion', function($attribute, $value, $parameters, $validator) {
+            if(count($value) > 0) {
+                return true;
+            }else{
+                return false;
+            }
+        });
     }
 
     /**

@@ -106,4 +106,6 @@ return [
 
     'attributes' => [],
 
+    'emptyquestion'             => 'You must choose questions',
+
 ];
