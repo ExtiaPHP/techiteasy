@@ -204,3 +204,15 @@ body {
 .margin_top_10 {
   margin-top : 10px;
 }
+
+.padding_top_8 {
+  padding-top : 8px;
+}
+
+.first_column .sizefont {
+   font-size:20px;
+ }
+
+.first_column .sizefont_title {
+  font-size:25px;
+}

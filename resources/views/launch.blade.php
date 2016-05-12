@@ -21,11 +21,11 @@
 						{!! Form::hidden('question_id', $question['question_id'], ['id' => 'question_id']) !!}
 						{!! Form::hidden('_token', csrf_token(), ['id' => 'csrf']) !!}
 
-						<div id="question">
+						<div id="question" class="sizefont_title">
 							<div><strong>{{ $question['question_label']  }}</strong></div>
 						</div>
 
-						<div id="answers">
+						<div id="answers" class="sizefont">
 							<ul id="answer_list">
 								@foreach($answers as $id => $label)
 									<li>{!! Form::checkbox('ans', $label, null, ['data-id' => $id])  !!} {{$label}}</li>
@@ -35,7 +35,7 @@
 					</div>
 					<div class="second_column">
 						<div class="footer pull-right">
-							<button type="button" id="button" class="btn btn-lg btn-extia btn-block">{!! Html::image('assets/img/right-black-arrow.png', 'suivante', ['width' => '256px', 'height' => '256px']) !!}</button>
+							<button type="button" id="button" class="btn btn-lg btn-extia btn-block">{!! Html::image('assets/img/right-black-arrow.png', 'suivante', ['width' => '150px', 'height' => '150px']) !!}</button>
 						</div>
 					</div>
 				@endif

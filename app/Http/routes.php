@@ -45,6 +45,8 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 Route::post('/login', 'HomeController@authenticate');
 
+Route::get('language','HomeController@language');
+
 /*
   |--------------------------------------------------------------------------
   | Admin Routes

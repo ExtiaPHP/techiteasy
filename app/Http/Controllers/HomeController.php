@@ -16,6 +16,8 @@ use Response;
 use App\Models\Question;
 use App\Models\Answer;
 
+use App\Jobs\ChangeLocale;
+
 
 class HomeController extends Controller
 {
@@ -140,6 +142,14 @@ class HomeController extends Controller
 
         return redirect()->route('welcome');
 
+    }
+
+    public function language(Request $request)
+    {
+        $changeLocale = new ChangeLocale($request->input('lang'));
+        $this->dispatch($changeLocale);
+
+        return redirect()->back();
     }
 
 }

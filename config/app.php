@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'fr',
+    'fallback_locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -201,5 +201,7 @@ return [
         'Form'      => Illuminate\Html\FormFacade::class
 
     ],
+
+    'languages' =>  ['en','fr'],
 
 ];
