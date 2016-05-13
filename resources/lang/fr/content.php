@@ -123,5 +123,6 @@ return [
     'header_admin' => 'Admin',
     'category_delete_successfull' => 'La catégorie a été supprimée.',
     'category_update_successfull' => 'La catégorie a bien été modifiée.',
+    'mail_send' => 'Mail envoyé avec succès.'
 
 ];

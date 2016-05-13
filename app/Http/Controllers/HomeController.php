@@ -140,7 +140,7 @@ class HomeController extends Controller
             $m->to(session('email'))->subject($subject);
         });
 
-        return redirect()->route('welcome');
+        return redirect()->route('welcome')->withSuccess(trans('content.mail_send'));
 
     }
 

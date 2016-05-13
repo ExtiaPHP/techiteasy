@@ -119,6 +119,7 @@ return [
     'launch_page_title' => 'Survey Extia',
     'mail_subject' => 'Result candidate :lastname :firstname',
     'mail_body' => 'he got :point point(s)',
-    'header_admin' => 'Admin'
+    'header_admin' => 'Admin',
+    'mail_send' => 'Mail sent successfully.'
 
 ];
