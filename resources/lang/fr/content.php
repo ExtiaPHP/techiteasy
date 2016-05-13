@@ -108,7 +108,7 @@ return [
     'login_page_title' => 'Accueil',
     'login_email' => 'courriel',
     'login_firstname' => 'prénom du candidat',
-    'login_lastname' => 'nom du cnadidat',
+    'login_lastname' => 'nom du candidat',
     'login_button' => 'Choisir un QCM',
     'index_questionnaire' => 'Choisissez le questionnaire :',
     'index_table_hashtag' => '#',
