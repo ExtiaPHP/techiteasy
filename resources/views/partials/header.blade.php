@@ -9,7 +9,7 @@
 
             @if(Auth::check())
                 <div class="collapse navbar-collapse navbar-right">
-                    <a href="{{ route('dashboard') }}"class="btn btn-default navbar-btn"><span>{{ Auth::user()->login }}</span> <i class="fa fa-unlock-alt"></i></a>
+                    <a href="" class="btn btn-default navbar-btn"><span>{{ Auth::user()->login }}</span> <i class="fa fa-unlock-alt"></i></a>
                     <a href="{{ url('auth/logout') }}"class="btn btn-default navbar-btn "><i class="fa fa-power-off" title="Déconnection"></i></a>
                 </div>
             @else

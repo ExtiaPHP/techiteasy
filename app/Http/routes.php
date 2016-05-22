@@ -23,16 +23,6 @@ Route::get('index', [
     'as' => 'index', 'uses' => 'HomeController@index'
 ]);
 
-Route::get('questionnaire/{id}/launch', [
-    'as' => 'questionnaire.launch', 'uses' => 'HomeController@launch'
-]);
-
-Route::post('question/next', [
-    'as' => 'questionnaire.next_question', 'uses' => 'HomeController@next'
-]);
-
-
-Route::get('questionnaire/valider/{id}', 'HomeController@valider');
 /*
   |--------------------------------------------------------------------------
   | Authentication Routes
@@ -55,23 +45,15 @@ Route::get('language','HomeController@language');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
+
     Route::get('/', [
-        'as' => 'dashboard', 'uses' => 'Admin\AdminController@dashboard'
-    ]);
-
-    Route::get('/piequestion', [
-        'as' => 'dashboard.piequestion', 'uses' => 'Admin\AdminController@questionByCategoryChart'
-    ]);
-
-    Route::get('/piequestionnaire', [
-        'as' => 'dashboard.piequestionnaire', 'uses' => 'Admin\AdminController@questionnaireByCategoryChart'
+        'as' => 'dashboard', 'uses' => 'Admin\QuestionController@index'
     ]);
 
     Route::resource('category', 'Admin\CategoryController', ['except' => ['show']]);
 
     Route::resource('question', 'Admin\QuestionController');
     Route::resource('reponse', 'Admin\ReponseController');
-    Route::resource('questionnaire', 'Admin\QuestionnaireController');
     Route::resource('level', 'Admin\LevelController');
 
     Route::get('questionnaire/listquestion/{id_category}', [

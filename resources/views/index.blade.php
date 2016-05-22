@@ -32,7 +32,6 @@
 			        @endforeach
 	    			</tbody>
     			</table>
-    			{!! str_replace('/?', '?', $questionnaires->render()) !!}
             </div>
         </div>
     </div>
