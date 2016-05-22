@@ -72,12 +72,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('question', 'Admin\QuestionController');
     Route::resource('reponse', 'Admin\ReponseController');
     Route::resource('questionnaire', 'Admin\QuestionnaireController');
+    Route::resource('level', 'Admin\LevelController');
 
     Route::get('questionnaire/listquestion/{id_category}', [
         'as' => 'listquestion', 'uses' => 'Admin\QuestionnaireController@listquestion'
     ]);
 
     Route::post('question/{id}/test', 'Admin\QuestionController@testQuestion');
+    Route::post('level/{id}/test', 'Admin\LevelController@testLevel');
 });
 
 Route::get('democlass', function(){
