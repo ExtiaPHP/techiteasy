@@ -7,7 +7,7 @@
 @section('content')
 
 <ol class="breadcrumb">
-    <li><a href="{!! route('admin.questionnaire.index') !!}"><i class="fa fa-arrow-circle-left"></i> {!! trans('content.back') !!}</a></li>
+    <li><a href="{!! route('admin.question.index') !!}"><i class="fa fa-arrow-circle-left"></i> {!! trans('content.back') !!}</a></li>
 </ol>
 
 {!! Form::open(array('url' => $question->id ? URL::route('admin.question.update', $question->id) : URL::route('admin.question.store'), 'method' => $question->id ? 'put' : 'post')) !!}
