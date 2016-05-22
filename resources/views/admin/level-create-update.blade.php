@@ -7,7 +7,7 @@
 @section('content')
     <h1 class="page-header"><i class="fa fa-music"></i> {!! trans('content.title_level_add') !!}</h1>
     <ol class="breadcrumb">
-        <li><a href="{!! route('admin.category.index') !!}"><i class="fa fa-arrow-circle-left"></i> {!! trans('content.back') !!}</a></li>
+        <li><a href="{!! route('admin.level.index') !!}"><i class="fa fa-arrow-circle-left"></i> {!! trans('content.back') !!}</a></li>
     </ol>
     <div class="row">
         <div class="col-md-12">
