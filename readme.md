@@ -27,7 +27,7 @@ Installation
 
 Clone the repository
 ```
-$ git clone git@bitbucket.org:PNEXTIA/techiteasy.git
+$ git clone https://github.com/ExtiaPHP/techiteasy.git
 ```
 
 Run `composer install` to setup all vendors
