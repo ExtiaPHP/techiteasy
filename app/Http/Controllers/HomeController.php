@@ -69,9 +69,11 @@ class HomeController extends Controller
 
         $question = $this->nextQuestion();
 
+        $ans = Answer::where('question_id', '=', $question['question_id'])->get()->lists('label', 'id');
+
         return view('launch', [
             'question' => $question,
-            'answers' => Answer::where('question_id', '=', $question['question_id'])->get()->lists('label', 'id'),
+            'answers' => $ans->isEmpty() ? null : $ans,
             'questionnaire_id' => $id
             ]
         );
@@ -95,9 +97,11 @@ class HomeController extends Controller
         if($question == null)
             $end = 1;
 
+        $ans = Answer::where('question_id', '=', $question['question_id'])->get()->lists('label', 'id');
+
         return Response::json([
             'question' => $question,
-            'answers' => Answer::where('question_id', '=', $question['question_id'])->get()->lists('label', 'id'),
+            'answers' => $ans->isEmpty() ? null : $ans,
             'end' => $end,
             'total' => count(session('results')) / session('questions_total') * 100
         ]);
@@ -111,14 +115,13 @@ class HomeController extends Controller
 
         $answers = json_decode($res['answer'], true);
 
-        $r[] = ['id_question' => $res['question'], 'answer' => $answers];
+        $r[] = ['id_question' => $res['question'], 'answer' => $res['answer_empty'] !== 'null' ? $res['answer_empty'] : $answers];
 
         Session::put('results', $r);
     }
 
     public function valider($id){
         $results = session('results');
-
         $res = new ResultSurvey();
         $res->lastname = session('lastName');
         $res->firstname = session('firstName');
@@ -130,30 +133,38 @@ class HomeController extends Controller
 
         $total = 0;
         $dataTotal = [];
+
         foreach($results as $ans) {
-            $data['result_survey_id'] = $res->id;
-            $data['question'] = Question::find($ans['id_question'])->label;
+
             $answers = Answer::where('question_id', '=', $ans['id_question'])->get()->lists('verify', 'id')->toArray();
             $questionPoint = Question::join('level', 'level.id', '=', 'question.level_id')->select('point')->first()->point;
 
-            foreach($ans['answer'] as $k => $value) {
-                $data['answer'.($k+1)] = Answer::find($value)->label;
-                if(!isset($answers[$value]) || $answers[$value] == 0) {
-                    $questionPoint--;
+            if(is_array($ans['answer'])) {
+                foreach ($ans['answer'] as $k => $value) {
+                    $data['result_survey_id'] = $res->id;
+                    $data['question'] = Question::find($ans['id_question'])->label;
+                    $data['answer'] = Answer::find($value)->label;
+                    $dataTotal[] = $data;
+                    if (!isset($answers[$value]) || $answers[$value] == 0) {
+                        $questionPoint--;
+                    }
                 }
+            }else{
+                $data['result_survey_id'] = $res->id;
+                $data['question'] = Question::find($ans['id_question'])->label;
+                $data['answer'] = $ans['answer'];
+                $dataTotal[] = $data;
+                $k=0;
             }
-
-            for($i = ($k+2);$i<=6;$i++)
-                $data['answer'.$i] = null;
 
             if($questionPoint < 0) $questionPoint = 0;
 
             $total += $questionPoint;
-            $dataTotal[] = $data;
+
         }
 
         Result::insert($dataTotal);
-
+die();
         $survey = Questionnaire::find(session('survey_id'));
 
         $subject = trans('content.mail_subject', ['firstname' => session('lastName'), 'lastname' => session('firstName'), 'survey' => $survey->title]);

@@ -59,14 +59,10 @@ class QuestionController extends Controller {
             [
                 $desc => $request->input('description'),
                 $quest => $request->input('question'),
-                $rep1 => $request->input('answer1'),
-                $rep2 => $request->input('answer2'),
             ],
             [
                 $desc => 'required',
                 $quest => 'required',
-                $rep1 => 'required',
-                $rep2 => 'required',
             ]);
 
         return $validator;
@@ -92,15 +88,21 @@ class QuestionController extends Controller {
 
             $idQuestion = DB::table('question')->insertGetId(
                     ['level_id' => $request->input('difficulties'), 'label' => $request->input('question'), 'description' => $request->input('description'), 'category_id' => $request->input('categories')]);
-        
-            //insert answers
-            $valide_1 = (null == $request->input('reponse_valide_1')  ? "0" : "1");
-            $valide_2 = (null == $request->input('reponse_valide_2')  ? "0" : "1");
-            
-             DB::table('answer')->insert(
+
+            if($request->input('answer1'))
+            {
+                $valide_1 = (null == $request->input('reponse_valide_1')  ? "0" : "1");
+                DB::table('answer')->insert(
                     ['label' => $request->input('answer1'), 'verify' => $valide_1, 'question_id'=>$idQuestion]);
-             DB::table('answer')->insert(
+            }
+
+            if($request->input('answer2'))
+            {
+                $valide_2 = (null == $request->input('reponse_valide_2')  ? "0" : "1");
+                DB::table('answer')->insert(
                     ['label' => $request->input('answer2'), 'verify' => $valide_2, 'question_id'=>$idQuestion]);
+            }
+
              if($request->input('answer3'))
              {
                 $valide_3 = is_null($request->input('reponse_valide_3')  ? "0" : "1");
@@ -159,19 +161,21 @@ class QuestionController extends Controller {
 
 
         $reponses = DB::table('answer')->where('question_id', '=',$id)->get();
+
         $i = 0;
 
-        $aReponses = array_fill(0, 6, null);
-        foreach ($reponses as $rep) {
-            $aReponses[$i] = $rep;
-            $i++;
+        if(!empty($reponses)) {
+            $aReponses = array_fill(0, 6, null);
+            foreach ($reponses as $rep) {
+                $aReponses[$i] = $rep;
+                $i++;
+            }
+        }else{
+            $aReponses = null;
         }
-        /*
-        echo "<pre>";
-        var_dump($aReponses);
-        echo "</pre>";
-        die();
-        */
+
+
+
 
         $difficulties = array("1" => "Débutant", "2" => "Intermédiare", "3" => "Difficile");
 

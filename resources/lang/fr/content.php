@@ -175,7 +175,8 @@ return [
     'rh_index_delete_bad' => 'Impossible de supprimer cette RH, elle est liée à des questionnaires',
     'choose_rh' => 'Choisir une RH',
     'choose_survey' => 'Choisir un questionnaire',
-    'cnil' => "J’accepte que mes coordonnées soient utilisés au sein de l’entreprise"
+    'cnil' => "J’accepte que mes coordonnées soient utilisés au sein de l’entreprise",
+    'question_open' => "Question ouverte",
 
 
 

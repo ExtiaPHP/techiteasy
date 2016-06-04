@@ -24,7 +24,7 @@
     {!! Form::textArea('question', $question->label, array('class' => 'form-control', 'placeholder' => trans('content.question_add_placeholder_question'), 'rows' => '3')) !!}
 </div>
 <div class="form-group">
-    <label for="difficulty">{!! trans('content.question_add_label_level') !!}</label>
+    <label for="difficulty">{!! trans('content.question_add_label_level') !!} ({!! Form::checkbox('question_open', 1, isset($aReponses) ? ($aReponses == null ? true : false) : false ).' '.trans('content.question_open') !!}) </label>
     {!! Form::select('difficulties', $difficulties, $question->level, ['class' => 'form-control']) !!}
 </select>
 </div>

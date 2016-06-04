@@ -26,11 +26,15 @@
 						</div>
 
 						<div id="answers" class="sizefont">
-							<ul id="answer_list">
-								@foreach($answers as $id => $label)
-									<li>{!! Form::checkbox('ans', $label, null, ['data-id' => $id])  !!} {{$label}}</li>
-								@endforeach
-							</ul>
+							<?php if($answers !== null) { ?>
+								<ul id="answer_list">
+									@foreach($answers as $id => $label)
+										<li>{!! Form::checkbox('ans', $label, null, ['data-id' => $id])  !!} {{$label}}</li>
+									@endforeach
+								</ul>
+							<?php }else{ ?>
+								<div>{!! Form::textarea('ans_empty', '', ['size' => '80x8', 'id' => 'ans_empty'])  !!}</div>
+							<?php } ?>
 						</div>
 					</div>
 					<div class="second_column">
@@ -56,10 +60,16 @@
 					check[i] = $(this).data('id');
 				});
 
+				if($('#ans_empty').length) {
+					var empty = $('#ans_empty').val();
+				}else{
+					var empty = "null";
+				}
+
 				$.ajax({
 					url : "{{route('questionnaire.next_question')}}",
 					type : 'POST',
-					data : "_token="+$('#csrf').val()+"&question="+$('#question_id').val()+"&answer="+JSON.stringify(check),
+					data : "_token="+$('#csrf').val()+"&question="+$('#question_id').val()+"&answer="+JSON.stringify(check)+"&answer_empty="+empty,
 					success : function(response){
 
 						$('#lineTotal').css('width', response.total+"%");
@@ -72,12 +82,15 @@
 						$('#question_id').val(response.question.question_id);
 
 						$('#answers').html('');
-
-						var s = '<ul id="answer_list">';
-						$.each(response.answers, function(key, value) {
-							s += "<li><input data-id='"+key+"' name='ans' type='checkbox' value='"+value+"'> "+value+"</li>";
-						});
-						s += "</ul>";
+						if(response.answers == null) {
+							var s = '<div><textarea id="ans_empty" name="ans_empty" cols="80" rows="8"></textarea></div>';
+						}else {
+							var s = '<ul id="answer_list">';
+							$.each(response.answers, function (key, value) {
+								s += "<li><input data-id='" + key + "' name='ans' type='checkbox' value='" + value + "'> " + value + "</li>";
+							});
+							s += "</ul>";
+						}
 
 						$('#answers').html(s);
 
