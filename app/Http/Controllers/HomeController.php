@@ -144,6 +144,7 @@ class HomeController extends Controller
                     $data['result_survey_id'] = $res->id;
                     $data['question'] = Question::find($ans['id_question'])->label;
                     $data['answer'] = Answer::find($value)->label;
+                    $data['question_id'] = $ans['id_question'];
                     $dataTotal[] = $data;
                     if (!isset($answers[$value]) || $answers[$value] == 0) {
                         $questionPoint--;
@@ -153,6 +154,7 @@ class HomeController extends Controller
                 $data['result_survey_id'] = $res->id;
                 $data['question'] = Question::find($ans['id_question'])->label;
                 $data['answer'] = $ans['answer'];
+                $data['question_id'] = $ans['id_question'];
                 $dataTotal[] = $data;
                 $k=0;
             }
@@ -164,7 +166,7 @@ class HomeController extends Controller
         }
 
         Result::insert($dataTotal);
-die();
+
         $survey = Questionnaire::find(session('survey_id'));
 
         $subject = trans('content.mail_subject', ['firstname' => session('lastName'), 'lastname' => session('firstName'), 'survey' => $survey->title]);

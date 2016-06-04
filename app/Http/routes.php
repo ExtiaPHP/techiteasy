@@ -75,6 +75,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('level', 'Admin\LevelController');
     Route::resource('rh', 'Admin\RhController');
 
+    Route::get('/result', [
+        'as' => 'admin.result.index', 'uses' => 'Admin\ResultController@index'
+    ]);
+
+    Route::get('/result/detail/{id}', [
+        'as' => 'admin.result.detail', 'uses' => 'Admin\ResultController@detail'
+    ]);
+
     Route::get('questionnaire/listquestion/{id_category}', [
         'as' => 'listquestion', 'uses' => 'Admin\QuestionnaireController@listquestion'
     ]);

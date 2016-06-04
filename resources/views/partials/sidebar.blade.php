@@ -17,4 +17,7 @@
     <li{!! isset($page) && $page == 'rh' ? ' class="active"' : '' !!}>
         <a href="{!! route('admin.rh.index') !!}"><i class="fa fa-tree"></i> {!! trans('content.sidebard_rh') !!}</a>
     </li>
+    <li{!! isset($page) && $page == 'result' ? ' class="active"' : '' !!}>
+        <a href="{!! route('admin.result.index') !!}"><i class="fa fa-cubes"></i> {!! trans('content.sidebard_result') !!}</a>
+    </li>
 </ul>

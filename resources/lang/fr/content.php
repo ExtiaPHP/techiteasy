@@ -177,6 +177,17 @@ return [
     'choose_survey' => 'Choisir un questionnaire',
     'cnil' => "J’accepte que mes coordonnées soient utilisés au sein de l’entreprise",
     'question_open' => "Question ouverte",
+    'sidebard_result' => 'Résultat',
+    'title_page_result_index' => 'Résultat',
+    'title_result_index' => 'Résultat',
+    'resultat_index_table_lastname_candidate' => 'Nom du candidat',
+    'resultat_index_table_firstname_candidate' => 'Prénom du candidat',
+    'resultat_index_table_mail_candidate' => 'Email du candidat',
+    'resultat_index_table_questionnaire' => 'Questionnaire',
+    'resultat_index_table_lastname_rh' => 'Nom de la RH',
+    'resultat_index_table_firstname_rh' => 'Prénom de la RH',
+    'resultat_index_table_question' => 'Question',
+    'resultat_index_table_answer' => 'Réponse',
 
 
 

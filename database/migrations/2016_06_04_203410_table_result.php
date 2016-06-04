@@ -29,6 +29,8 @@ class TableResult extends Migration
             $table->foreign('result_survey_id')->references('id')->on('result_survey');
             $table->string('question', '255');
             $table->string('answer', '255');
+            $table->integer('question_id')->unsigned();
+            $table->foreign('question_id')->references('id')->on('question');
         });
     }
 
