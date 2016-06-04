@@ -13,6 +13,12 @@ class Rh extends Model
      */
     protected $table = 'rh';
     public $timestamps = false;
+    protected $appends = array('name');
+
+    public function getNameAttribute()
+    {
+        return $this->attributes['lastname'].' '.$this->attributes['firstname'];
+    }
 
 
 }

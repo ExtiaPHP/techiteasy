@@ -15,6 +15,9 @@ use Response;
 
 use App\Models\Question;
 use App\Models\Answer;
+use App\Models\Rh;
+use App\Models\ResultSurvey;
+use App\Models\Result;
 
 use App\Jobs\ChangeLocale;
 
@@ -26,8 +29,11 @@ class HomeController extends Controller
 	 */
     public function welcome()
     {
-    	$data = [];
-        return view('welcome', $data); // May use compact
+
+        $rhs = Rh::get()->lists('name', 'id')->toArray();
+        $surveys = Questionnaire::get()->lists('title', 'id')->toArray();
+
+        return view('welcome', compact('rhs', 'surveys')); // May use compact
     }
 
     /*
@@ -39,17 +45,17 @@ class HomeController extends Controller
     	return view('login', $data); // May use compact
     }
     public function authenticate(Request $request){
-        session(['email' => $request->input("email"), "firstName" => $request->input("firstName"), "lastName" => $request->input("lastName")]);
+        session([
+            'email' => $request->input("email"),
+            "firstName" => $request->input("firstName"),
+            "lastName" => $request->input("lastName"),
+            "rh_id" => $request->input("rh"),
+            "survey_id" => $request->input("questionnaire"),
+        ]);
  
-        return redirect()->route('index');
+        return redirect()->route('questionnaire.launch', ['id' => $request->input("questionnaire")]);
     }
-    public function index(){
-        $questionnaires = Questionnaire::paginate(5);
 
-        return view('index', compact('page', 'questionnaires')); // May use compact
-
-        //display questionnaires list        
-    }
     public function launch($id){
         Session::put('results', []);
 
@@ -113,26 +119,45 @@ class HomeController extends Controller
     public function valider($id){
         $results = session('results');
 
+        $res = new ResultSurvey();
+        $res->lastname = session('lastName');
+        $res->firstname = session('firstName');
+        $res->email = session('email');
+        $res->questionnaire_id = session('survey_id');
+        $res->rh_id = session('rh_id');
+        $res->created_at = date('Y-m-d H:i:s');
+        $res->save();
+
         $total = 0;
+        $dataTotal = [];
         foreach($results as $ans) {
+            $data['result_survey_id'] = $res->id;
+            $data['question'] = Question::find($ans['id_question'])->label;
             $answers = Answer::where('question_id', '=', $ans['id_question'])->get()->lists('verify', 'id')->toArray();
             $questionPoint = Question::join('level', 'level.id', '=', 'question.level_id')->select('point')->first()->point;
 
-            foreach($ans['answer'] as $value) {
-
+            foreach($ans['answer'] as $k => $value) {
+                $data['answer'.($k+1)] = Answer::find($value)->label;
                 if(!isset($answers[$value]) || $answers[$value] == 0) {
                     $questionPoint--;
                 }
             }
 
+            for($i = ($k+2);$i<=6;$i++)
+                $data['answer'.$i] = null;
+
             if($questionPoint < 0) $questionPoint = 0;
 
             $total += $questionPoint;
+            $dataTotal[] = $data;
         }
 
+        Result::insert($dataTotal);
 
-        $subject = trans('content.mail_subject', ['firstname' => session('lastName'), 'lastname' => session('firstName')]);
-        $message = trans('content.mail_body', ['point' => $total]);
+        $survey = Questionnaire::find(session('survey_id'));
+
+        $subject = trans('content.mail_subject', ['firstname' => session('lastName'), 'lastname' => session('firstName'), 'survey' => $survey->title]);
+        $message = trans('content.mail_body');
 
         Mail::send('emails.mail', ['body' => $message], function ($m) use ($subject) {
             $m->from(Config::get('mail.from'), 'teachiteasy');

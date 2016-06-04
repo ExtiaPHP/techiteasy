@@ -12,6 +12,13 @@
               {!! Form::open(array('url' => 'login', 'method' => 'post')) !!}
                 <fieldset>
                     <div class="form-group">
+                        {!! Form::select('rh', ['' => trans('content.choose_rh')] + $rhs, '', array('class' => 'form-control', 'required' => 'required')) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::select('questionnaire', ['' => trans('content.choose_survey')] + $surveys, '', array('class' => 'form-control', 'required' => 'required')) !!}
+                    </div>
+                    <hr>
+                    <div class="form-group">
                         {!! Form::text('email', '', array('class' => 'form-control', 'placeholder' => trans('content.login_email'), 'required' => 'required')) !!}
                     </div>
                     <br/>
@@ -20,6 +27,9 @@
                     </div>
                     <div class="form-group">
                         {!! Form::text('lastName', '', array('class' => 'form-control', 'placeholder' => trans('content.login_lastname'), 'required' => 'required')) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::checkbox('cnil', '1', null, array('required' => 'required')) !!} {!! trans('content.cnil') !!}
                     </div>
                     <button type="submit" class="btn btn-lg btn-extia btn-block">{!!  trans('content.login_button') !!} <i class="fa fa-rocket"></i></button>
                 </fieldset>

@@ -118,8 +118,8 @@ return [
     'index_label_link_action' => 'GO',
     'launch_title' => 'Questionnaire Extia :',
     'launch_page_title' => 'Questionnaire Extia',
-    'mail_subject' => 'Résultat du questionnaire du candidat :lastname :firstname',
-    'mail_body' => 'il a obtenu :point point(s)',
+    'mail_subject' => 'Questionnaire ":survey" du candidat :lastname :firstname',
+    'mail_body' => 'questionnaire finis',
     'header_admin' => 'Admin',
     'category_delete_successfull' => 'La catégorie a été supprimée.',
     'category_update_successfull' => 'La catégorie a bien été modifiée.',
@@ -173,6 +173,9 @@ return [
     'rh_delete_successfull' => 'La RH a bien été supprimée.',
     'rh_index_delete_good' => 'Etes vous sure de vouloir supprimer cette RH ?',
     'rh_index_delete_bad' => 'Impossible de supprimer cette RH, elle est liée à des questionnaires',
+    'choose_rh' => 'Choisir une RH',
+    'choose_survey' => 'Choisir un questionnaire',
+    'cnil' => "J’accepte que mes coordonnées soient utilisés au sein de l’entreprise"
 
 
 
