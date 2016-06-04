@@ -144,5 +144,6 @@ return [
     'level_edit_button' => 'Modifier',
     'level_update_successfull' => 'Diffilcuty was changed.',
     'level_delete_successfull' => 'Diffilcuty was delete.',
+    'sidebard_rh' => 'RH',
 
 ];

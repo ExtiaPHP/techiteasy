@@ -17,11 +17,11 @@
 </div>
 <div class="form-group">
     <label for="description">{!! trans('content.question_add_label_description') !!}</label>
-    {!! Form::text('description', $question->label, array('class' => 'form-control', 'placeholder' => trans('content.question_add_placeholder_description'))) !!}
+    {!! Form::text('description', $question->description, array('class' => 'form-control', 'placeholder' => trans('content.question_add_placeholder_description'))) !!}
 </div>
 <div class="form-group">
     <label for="question">{!! trans('content.question_add_label_question') !!}</label>
-    {!! Form::textArea('question', $question->description, array('class' => 'form-control', 'placeholder' => trans('content.question_add_placeholder_question'), 'rows' => '3')) !!}
+    {!! Form::textArea('question', $question->label, array('class' => 'form-control', 'placeholder' => trans('content.question_add_placeholder_question'), 'rows' => '3')) !!}
 </div>
 <div class="form-group">
     <label for="difficulty">{!! trans('content.question_add_label_level') !!}</label>

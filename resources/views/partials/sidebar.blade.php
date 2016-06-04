@@ -14,4 +14,7 @@
     <li{!! isset($page) && $page == 'level' ? ' class="active"' : '' !!}>
         <a href="{!! route('admin.level.index') !!}"><i class="fa fa-music"></i> {!! trans('content.sidebard_level') !!}</a>
     </li>
+    <li{!! isset($page) && $page == 'rh' ? ' class="active"' : '' !!}>
+        <a href="{!! route('admin.rh.index') !!}"><i class="fa fa-tree"></i> {!! trans('content.sidebard_rh') !!}</a>
+    </li>
 </ul>

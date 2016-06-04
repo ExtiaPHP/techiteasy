@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Question;
 use App\Models\Category;
 use DB;
-    use Validator;
+use Validator;
 
 use App\Models\Level;
 
@@ -91,7 +91,7 @@ class QuestionController extends Controller {
             }
 
             $idQuestion = DB::table('question')->insertGetId(
-                    ['level' => $request->input('difficulties'), 'label' => $request->input('question'), 'description' => $request->input('description'), 'category_id' => $request->input('categories')]);
+                    ['level_id' => $request->input('difficulties'), 'label' => $request->input('question'), 'description' => $request->input('description'), 'category_id' => $request->input('categories')]);
         
             //insert answers
             $valide_1 = (null == $request->input('reponse_valide_1')  ? "0" : "1");
